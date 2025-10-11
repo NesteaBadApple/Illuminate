@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c11tgebwk6i2n"]
+
+[ext_resource type="Texture2D" uid="uid://l5tpm6fnxl5g" path="res://sprites/crystal.png" id="1_0mmd5"]
+[ext_resource type="Script" uid="uid://n7ajf12iveyy" path="res://scripts/crystal.gd" id="1_t4dcj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0mmd5"]
+radius = 37.054
+
+[sub_resource type="Gradient" id="Gradient_0mmd5"]
+offsets = PackedFloat32Array(0, 0.649351)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4dcj"]
+gradient = SubResource("Gradient_0mmd5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Crystal" type="Area2D"]
+position = Vector2(0, -15)
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_t4dcj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_0mmd5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0mmd5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(20.1563, 20.1563)
+color = Color(0.433242, 0.902103, 0.890637, 1)
+energy = 0.01
+texture = SubResource("GradientTexture2D_t4dcj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
