@@ -7,13 +7,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 
 [sub_resource type="Gradient" id="Gradient_g2els"]
-offsets = PackedFloat32Array(0, 0.649351, 1)
+offsets = PackedFloat32Array(0, 0.37013, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.0779221, 0.0779221, 0.0779221, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qhqgy"]
 gradient = SubResource("Gradient_g2els")
-width = 100
-height = 100
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -31,11 +29,12 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
 scale = Vector2(2.96875, 2.75)
 color = Color(0.868834, 0.858158, 0.475139, 1)
 texture = SubResource("GradientTexture2D_qhqgy")
+texture_scale = 2.0
 script = ExtResource("3_qhqgy")

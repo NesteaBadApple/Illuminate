@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://1gg5wvicfjjq"]
+[gd_scene load_steps=15 format=4 uid="uid://1gg5wvicfjjq"]
 
 [ext_resource type="PackedScene" uid="uid://d2r4c61pcpx3f" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://c11tgebwk6i2n" path="res://scenes/crystal.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://hl8v8rx6l4m8" path="res://scenes/Walls.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://du6i6ws687asv" path="res://sprites/firefly1.jpg" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://df5c5iis07o2q" path="res://scenes/Spirit.tscn" id="4_tipki"]
 [ext_resource type="Texture2D" uid="uid://cjqaiut6146ck" path="res://sprites/noprogress.png" id="5_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://kgf83b7leb67" path="res://sprites/fullprogress.png" id="7_85g3d"]
 [ext_resource type="Script" uid="uid://ftylx5jsml8q" path="res://scripts/CrystalNum.gd" id="7_o6xl0"]
@@ -20,6 +21,12 @@ scenes/1/scene = ExtResource("3_sugp2")
 [sub_resource type="TileSet" id="TileSet_tbgi4"]
 sources/0 = SubResource("TileSetScenesCollectionSource_jyhfs")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_85g3d"]
+scenes/1/scene = ExtResource("4_tipki")
+
+[sub_resource type="TileSet" id="TileSet_choun"]
+sources/0 = SubResource("TileSetScenesCollectionSource_85g3d")
+
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0wfyh")]
@@ -33,8 +40,12 @@ tile_set = SubResource("TileSet_tipki")
 tile_map_data = PackedByteArray("AAArAAwAAAAAAAAAAQArAA0AAAAAAAAAAQArAA4AAAAAAAAAAQArAA8AAAAAAAAAAQArABAAAAAAAAAAAQArABEAAAAAAAAAAQArABIAAAAAAAAAAQAqABMAAAAAAAAAAQAqABQAAAAAAAAAAQAqABUAAAAAAAAAAQAqABYAAAAAAAAAAQApABcAAAAAAAAAAQApABgAAAAAAAAAAQApABkAAAAAAAAAAQApABoAAAAAAAAAAQApABsAAAAAAAAAAQApABwAAAAAAAAAAQApAB0AAAAAAAAAAQApAB4AAAAAAAAAAQAoAB8AAAAAAAAAAQAoACAAAAAAAAAAAQApACEAAAAAAAAAAQAqACIAAAAAAAAAAQArACIAAAAAAAAAAQAsACIAAAAAAAAAAQAtACIAAAAAAAAAAQAuACIAAAAAAAAAAQAvACIAAAAAAAAAAQAvACEAAAAAAAAAAQAwACAAAAAAAAAAAQAwAB8AAAAAAAAAAQAwAB4AAAAAAAAAAQAwAB0AAAAAAAAAAQAxABwAAAAAAAAAAQAxABsAAAAAAAAAAQAxABoAAAAAAAAAAQAyABkAAAAAAAAAAQAyABgAAAAAAAAAAQAyABcAAAAAAAAAAQAyABYAAAAAAAAAAQAyABUAAAAAAAAAAQAyABQAAAAAAAAAAQAyABMAAAAAAAAAAQAyABIAAAAAAAAAAQAyABEAAAAAAAAAAQAyABAAAAAAAAAAAQAzABAAAAAAAAAAAQA0ABAAAAAAAAAAAQA1ABAAAAAAAAAAAQA2ABAAAAAAAAAAAQA3ABAAAAAAAAAAAQA4ABAAAAAAAAAAAQA5ABAAAAAAAAAAAQA6AA8AAAAAAAAAAQA7AA4AAAAAAAAAAQA8AA0AAAAAAAAAAQA9AAwAAAAAAAAAAQA+AAwAAAAAAAAAAQA/AAsAAAAAAAAAAQBAAAoAAAAAAAAAAQBBAAkAAAAAAAAAAQBCAAgAAAAAAAAAAQBCAAcAAAAAAAAAAQBDAAYAAAAAAAAAAQBEAAUAAAAAAAAAAQBEAAQAAAAAAAAAAQBFAAMAAAAAAAAAAQBFAAIAAAAAAAAAAQBFAAEAAAAAAAAAAQBEAAEAAAAAAAAAAQBEAAIAAAAAAAAAAQBEAAMAAAAAAAAAAQBEAAYAAAAAAAAAAQBEAAcAAAAAAAAAAQBDAAgAAAAAAAAAAQBDAAkAAAAAAAAAAQBDAAoAAAAAAAAAAQBCAAsAAAAAAAAAAQBCAAwAAAAAAAAAAQBCAA0AAAAAAAAAAQBCAA4AAAAAAAAAAQBCAA8AAAAAAAAAAQBBABAAAAAAAAAAAQBBABEAAAAAAAAAAQBBABIAAAAAAAAAAQBBABMAAAAAAAAAAQBAABQAAAAAAAAAAQBAABUAAAAAAAAAAQBAABYAAAAAAAAAAQBAABcAAAAAAAAAAQBAABgAAAAAAAAAAQA/ABkAAAAAAAAAAQA/ABoAAAAAAAAAAQA/ABsAAAAAAAAAAQA/ABwAAAAAAAAAAQBAAB0AAAAAAAAAAQBAAB4AAAAAAAAAAQBBAB8AAAAAAAAAAQBCAB8AAAAAAAAAAQBDAB8AAAAAAAAAAQBEAB8AAAAAAAAAAQBEACAAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_tbgi4")
 
+[node name="Spiritmap" type="TileMapLayer" parent="."]
+position = Vector2(29, 31)
+tile_map_data = PackedByteArray("AAAfABkAAAAAAAAAAQAjAB0AAAAAAAAAAQApABgAAAAAAAAAAQAlABIAAAAAAAAAAQAdABMAAAAAAAAAAQAuABQAAAAAAAAAAQAwABwAAAAAAAAAAQAaAB0AAAAAAAAAAQASABgAAAAAAAAAAQATABQAAAAAAAAAAQAZABcAAAAAAAAAAQAVABwAAAAAAAAAAQAOAB4AAAAAAAAAAQAXAB8AAAAAAAAAAQAjACEAAAAAAAAAAQApACAAAAAAAAAAAQAqABoAAAAAAAAAAQArABkAAAAAAAAAAQArABQAAAAAAAAAAQAaABIAAAAAAAAAAQAYABAAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_choun")
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 z_index = -10
 blend_mode = 1
 
@@ -64,13 +75,34 @@ offset_bottom = 23.0
 script = ExtResource("7_o6xl0")
 
 [connection signal="body_entered" from="Crystalmap/Crystal" to="Crystalmap/Crystal" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45055" to="Crystalmap/@Area2D@45055" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45056" to="Crystalmap/@Area2D@45056" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45057" to="Crystalmap/@Area2D@45057" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45058" to="Crystalmap/@Area2D@45058" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45059" to="Crystalmap/@Area2D@45059" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45060" to="Crystalmap/@Area2D@45060" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45061" to="Crystalmap/@Area2D@45061" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45062" to="Crystalmap/@Area2D@45062" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45063" to="Crystalmap/@Area2D@45063" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@45064" to="Crystalmap/@Area2D@45064" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69418" to="Crystalmap/@Area2D@69418" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69419" to="Crystalmap/@Area2D@69419" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69420" to="Crystalmap/@Area2D@69420" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69421" to="Crystalmap/@Area2D@69421" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69422" to="Crystalmap/@Area2D@69422" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69423" to="Crystalmap/@Area2D@69423" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69424" to="Crystalmap/@Area2D@69424" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69425" to="Crystalmap/@Area2D@69425" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69426" to="Crystalmap/@Area2D@69426" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@69427" to="Crystalmap/@Area2D@69427" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/Area2D" to="Spiritmap/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69529" to="Spiritmap/@Area2D@69529" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69530" to="Spiritmap/@Area2D@69530" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69531" to="Spiritmap/@Area2D@69531" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69808" to="Spiritmap/@Area2D@69808" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69809" to="Spiritmap/@Area2D@69809" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69810" to="Spiritmap/@Area2D@69810" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69811" to="Spiritmap/@Area2D@69811" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69812" to="Spiritmap/@Area2D@69812" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69813" to="Spiritmap/@Area2D@69813" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69814" to="Spiritmap/@Area2D@69814" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69815" to="Spiritmap/@Area2D@69815" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69816" to="Spiritmap/@Area2D@69816" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69817" to="Spiritmap/@Area2D@69817" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69818" to="Spiritmap/@Area2D@69818" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69819" to="Spiritmap/@Area2D@69819" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69820" to="Spiritmap/@Area2D@69820" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69821" to="Spiritmap/@Area2D@69821" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69822" to="Spiritmap/@Area2D@69822" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69823" to="Spiritmap/@Area2D@69823" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@69824" to="Spiritmap/@Area2D@69824" method="_on_body_entered"]
