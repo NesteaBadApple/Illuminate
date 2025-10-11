@@ -14,6 +14,10 @@ config/name="I_Shall_Illuminate"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 
+[autoload]
+
+CrystalManager="*res://scripts/CrystalManager.gd"
+
 [display]
 
 window/size/viewport_width=1200
