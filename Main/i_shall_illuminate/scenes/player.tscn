@@ -29,7 +29,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
