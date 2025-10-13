@@ -64,7 +64,6 @@ frame_progress = 0.886056
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -10)
 color = Color(0.152941, 1, 1, 1)
-energy = 0.5
 texture = SubResource("GradientTexture2D_h04ge")
 texture_scale = 2.0
 

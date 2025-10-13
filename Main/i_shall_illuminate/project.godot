@@ -17,6 +17,7 @@ config/icon="res://sprites/icon.svg"
 [autoload]
 
 CrystalManager="*res://scripts/CrystalManager.gd"
+FrogManager="*res://scripts/frog_manager.gd"
 
 [display]
 

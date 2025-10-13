@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=3 uid="uid://dwg0x07kqyj3"]
+
+[ext_resource type="Script" uid="uid://b0eqsgoarngp0" path="res://scripts/frog.gd" id="1_wiiuq"]
+[ext_resource type="Texture2D" uid="uid://dcy1p0fii6ev7" path="res://sprites/frog animation/alert.png" id="2_j38ec"]
+[ext_resource type="Texture2D" uid="uid://orku1mrk2li6" path="res://sprites/frog animation/attack (1).png" id="3_5cyyp"]
+[ext_resource type="Texture2D" uid="uid://ds7c8j6qhbljo" path="res://sprites/frog animation/alert(2).png" id="3_cvt0w"]
+[ext_resource type="Texture2D" uid="uid://g10hi1bqs6f0" path="res://sprites/frog animation/alert (3).png" id="4_8kk5g"]
+[ext_resource type="Texture2D" uid="uid://bvayff7d3ju5l" path="res://sprites/frog animation/attack (2).png" id="4_rd326"]
+[ext_resource type="Texture2D" uid="uid://byuvkmdhsrv8o" path="res://sprites/frog animation/idle (1).png" id="5_cvt0w"]
+[ext_resource type="Texture2D" uid="uid://cb3ps1b87jvrr" path="res://sprites/frog animation/attack(3).png" id="6_40hiu"]
+[ext_resource type="Texture2D" uid="uid://ccfmox2uvp6sv" path="res://sprites/frog animation/attack(4).png" id="7_omj1a"]
+[ext_resource type="Texture2D" uid="uid://bbjfgnc2suocq" path="res://sprites/frog animation/idle (2).png" id="10_aumaf"]
+[ext_resource type="Texture2D" uid="uid://16od3nkiceil" path="res://sprites/frog animation/idle (3).png" id="11_o353j"]
+[ext_resource type="Texture2D" uid="uid://ch52ux3bnov0s" path="res://sprites/frog animation/frog_blue_spritesheet.png" id="12_p8yr8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_whe2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j38ec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cvt0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8kk5g")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5cyyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rd326")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_40hiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_omj1a")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cvt0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_aumaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o353j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_p8yr8")
+}],
+"loop": true,
+"name": &"landing",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p8yr8"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wiiuq"]
+radius = 102.078
+
+[sub_resource type="Gradient" id="Gradient_p8yr8"]
+offsets = PackedFloat32Array(0, 0.541936, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0774193, 0.0774193, 0.0774193, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mokc4"]
+gradient = SubResource("Gradient_p8yr8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Frog" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+disable_mode = 2
+collision_layer = 3
+script = ExtResource("1_wiiuq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(9.53674e-07, 1.43051e-06)
+scale = Vector2(1.63996, 1.94825)
+sprite_frames = SubResource("SpriteFrames_whe2r")
+animation = &"landing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p8yr8")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_wiiuq")
+
+[node name="JumpTimer" type="Timer" parent="."]
+
+[node name="AttackBufferTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(2.88785e-06, 0.92264, 0.927759, 1)
+texture = SubResource("GradientTexture2D_mokc4")
