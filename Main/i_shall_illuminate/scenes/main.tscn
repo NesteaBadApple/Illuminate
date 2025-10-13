@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=4 uid="uid://1gg5wvicfjjq"]
+[gd_scene load_steps=18 format=4 uid="uid://1gg5wvicfjjq"]
 
 [ext_resource type="PackedScene" uid="uid://d2r4c61pcpx3f" path="res://scenes/player.tscn" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://i8pf07hjtkgr" path="res://scenes/main.gd" id="1_choun"]
 [ext_resource type="PackedScene" uid="uid://c11tgebwk6i2n" path="res://scenes/crystal.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://hl8v8rx6l4m8" path="res://scenes/Walls.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://c45enq0gxu0sy" path="res://sprites/Walls.png" id="4_85g3d"]
@@ -58,13 +59,14 @@ scenes/1/scene = ExtResource("4_tipki")
 sources/0 = SubResource("TileSetScenesCollectionSource_85g3d")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_choun")
 
 [node name="Player" parent="." instance=ExtResource("1_0wfyh")]
 z_index = 5
 position = Vector2(598, 427)
 
 [node name="Crystalmap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAlABAAAAAAAAAAAQAtABkAAAAAAAAAAQA6ABUAAAAAAAAAAQA4ACEAAAAAAAAAAQBGABwAAAAAAAAAAQBHABMAAAAAAAAAAQAdAB4AAAAAAAAAAQAbABYAAAAAAAAAAQAjABYAAAAAAAAAAQA3AAoAAAAAAAAAAQAsAAgAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAsAAgAAAAAAAAAAQApABcAAAAAAAAAAQAvABgAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_tipki")
 
 [node name="Walls" type="TileMapLayer" parent="."]
@@ -72,20 +74,18 @@ tile_map_data = PackedByteArray("AAAgAB8ABQABAAAAAAAhAB8ABQABAAAAAAAiAB8ABQABAAA
 tile_set = SubResource("TileSet_tbgi4")
 
 [node name="Spiritmap" type="TileMapLayer" parent="."]
-visible = false
 z_index = 1
 position = Vector2(29, 31)
-tile_map_data = PackedByteArray("AAAdABgAAAAAAAAAAQAiABQAAAAAAAAAAQAqABQAAAAAAAAAAQApAA4AAAAAAAAAAQAyABgAAAAAAAAAAQAuAB4AAAAAAAAAAQAsACAAAAAAAAAAAQAgACAAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAApAA4AAAAAAAAAAQAoABcAAAAAAAAAAQAqABcAAAAAAAAAAQAmABoAAAAAAAAAAQAtABoAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_choun")
 
 [node name="DarkMode" type="DirectionalLight2D" parent="."]
-visible = false
 z_index = -10
 blend_mode = 1
 
 [node name="FireflyThighs" type="Sprite2D" parent="."]
 z_index = -100
-position = Vector2(712, 217)
+position = Vector2(676, 460)
 texture = ExtResource("4_jyhfs")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -109,21 +109,10 @@ offset_bottom = 23.0
 script = ExtResource("7_o6xl0")
 
 [connection signal="body_entered" from="Crystalmap/Crystal" to="Crystalmap/Crystal" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42438" to="Crystalmap/@Area2D@42438" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42439" to="Crystalmap/@Area2D@42439" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42440" to="Crystalmap/@Area2D@42440" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42441" to="Crystalmap/@Area2D@42441" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42442" to="Crystalmap/@Area2D@42442" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42443" to="Crystalmap/@Area2D@42443" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42444" to="Crystalmap/@Area2D@42444" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42445" to="Crystalmap/@Area2D@42445" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42446" to="Crystalmap/@Area2D@42446" method="_on_body_entered"]
-[connection signal="body_entered" from="Crystalmap/@Area2D@42447" to="Crystalmap/@Area2D@42447" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@43531" to="Crystalmap/@Area2D@43531" method="_on_body_entered"]
+[connection signal="body_entered" from="Crystalmap/@Area2D@43532" to="Crystalmap/@Area2D@43532" method="_on_body_entered"]
 [connection signal="body_entered" from="Spiritmap/Area2D" to="Spiritmap/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42448" to="Spiritmap/@Area2D@42448" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42449" to="Spiritmap/@Area2D@42449" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42450" to="Spiritmap/@Area2D@42450" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42451" to="Spiritmap/@Area2D@42451" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42452" to="Spiritmap/@Area2D@42452" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42453" to="Spiritmap/@Area2D@42453" method="_on_body_entered"]
-[connection signal="body_entered" from="Spiritmap/@Area2D@42454" to="Spiritmap/@Area2D@42454" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@43533" to="Spiritmap/@Area2D@43533" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@43534" to="Spiritmap/@Area2D@43534" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@43535" to="Spiritmap/@Area2D@43535" method="_on_body_entered"]
+[connection signal="body_entered" from="Spiritmap/@Area2D@43536" to="Spiritmap/@Area2D@43536" method="_on_body_entered"]
