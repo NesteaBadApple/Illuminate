@@ -34,7 +34,7 @@ zoom = Vector2(3, 3)
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
 scale = Vector2(2.96875, 2.75)
-color = Color(0.868834, 0.858158, 0.475139, 1)
+color = Color(0.943004, 0.941417, 0.739006, 1)
 texture = SubResource("GradientTexture2D_qhqgy")
 texture_scale = 2.0
 script = ExtResource("3_qhqgy")
