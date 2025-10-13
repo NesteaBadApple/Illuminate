@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cme450t325sdo"]
+
+[ext_resource type="Texture2D" uid="uid://1572go567mdf" path="res://sprites/rocks.png" id="1_ooke6"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_f73mp"]
+
+[node name="Rocks" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_f73mp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ooke6")
