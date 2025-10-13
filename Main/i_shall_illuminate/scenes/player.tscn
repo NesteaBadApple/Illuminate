@@ -16,7 +16,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-position = Vector2(0, -13)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_g2els")
 sprint_multiplier = 2.0
 
@@ -29,7 +29,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)

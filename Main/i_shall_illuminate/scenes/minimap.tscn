@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6wgsfg0g5y7r"]
+
+[ext_resource type="Script" uid="uid://dcaxnqepvamyi" path="res://scripts/minimap.gd" id="1_lj7mc"]
+
+[node name="Minimap" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lj7mc")
+
+[node name="PlayerIcon" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CrystalMarkers" type="Node2D" parent="."]
