@@ -16,6 +16,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and not lit:
 		lit = true
+		$LitSfx.play()
 		var tween = create_tween()
 		tween.tween_property(light_node, "energy", 1.0, 0.5)
 		emit_signal("crystal_lit")  # 🔔 Notify manager

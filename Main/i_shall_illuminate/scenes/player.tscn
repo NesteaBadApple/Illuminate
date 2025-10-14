@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2r4c61pcpx3f"]
+[gd_scene load_steps=12 format=3 uid="uid://d2r4c61pcpx3f"]
 
 [ext_resource type="Script" uid="uid://b08x5pq4bm7w0" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c1v7bsmi0jiqe" path="res://sprites/icon.svg" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://bexdglyutcb2" path="res://scripts/player_light.gd" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cjqaiut6146ck" path="res://sprites/noprogress.png" id="5_fjrip"]
 [ext_resource type="Texture2D" uid="uid://csb0f3248vk1e" path="res://sprites/halffullprogress.png" id="6_smehm"]
+[ext_resource type="AudioStream" uid="uid://bb08shw775eic" path="res://sprites/punch-04-383965.mp3" id="7_fjrip"]
 [ext_resource type="Texture2D" uid="uid://kgf83b7leb67" path="res://sprites/fullprogress.png" id="7_ur7pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
@@ -75,5 +76,8 @@ scale = Vector2(5.46154, 4.84211)
 value = 100.0
 texture_under = ExtResource("5_fjrip")
 texture_progress = ExtResource("7_ur7pv")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fjrip")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

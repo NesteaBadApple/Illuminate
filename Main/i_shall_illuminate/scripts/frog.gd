@@ -56,6 +56,7 @@ func _on_body_entered(body: Node2D) -> void:
 		target = body
 		has_target = true
 		print("🐸 Frog detected player!")
+		$Croak.play()
 		_try_attack_target()
 
 func _on_body_exited(body: Node2D) -> void:

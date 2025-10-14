@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwg0x07kqyj3"]
+[gd_scene load_steps=23 format=3 uid="uid://dwg0x07kqyj3"]
 
 [ext_resource type="Script" uid="uid://b0eqsgoarngp0" path="res://scripts/frog.gd" id="1_wiiuq"]
 [ext_resource type="Texture2D" uid="uid://dcy1p0fii6ev7" path="res://sprites/frog animation/alert.png" id="2_j38ec"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bbjfgnc2suocq" path="res://sprites/frog animation/idle (2).png" id="10_aumaf"]
 [ext_resource type="Texture2D" uid="uid://16od3nkiceil" path="res://sprites/frog animation/idle (3).png" id="11_o353j"]
 [ext_resource type="Texture2D" uid="uid://ch52ux3bnov0s" path="res://sprites/frog animation/frog_blue_spritesheet.png" id="12_p8yr8"]
+[ext_resource type="AudioStream" uid="uid://c314ji4pexpdk" path="res://sprites/get-comfy.mp3" id="14_4pjqi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4pjqi"]
 atlas = ExtResource("9_mokc4")
@@ -145,3 +146,6 @@ one_shot = true
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(2.88785e-06, 0.92264, 0.927759, 1)
 texture = SubResource("GradientTexture2D_mokc4")
+
+[node name="Croak" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_4pjqi")

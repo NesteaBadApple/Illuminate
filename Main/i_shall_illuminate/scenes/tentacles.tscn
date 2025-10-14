@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dj0bwy84lgy6t"]
+
+[ext_resource type="Texture2D" uid="uid://v10pxp7ocuyx" path="res://sprites/tentacles.png" id="1_5ad3m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grxmd"]
+atlas = ExtResource("1_5ad3m")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkv8f"]
+atlas = ExtResource("1_5ad3m")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqriv"]
+atlas = ExtResource("1_5ad3m")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1qtn"]
+atlas = ExtResource("1_5ad3m")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg2yd"]
+atlas = ExtResource("1_5ad3m")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6xudk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grxmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkv8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqriv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1qtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg2yd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_efux0"]
+offsets = PackedFloat32Array(0, 0.554839, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0451613, 0.0451613, 0.0451613, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t0d7j"]
+gradient = SubResource("Gradient_efux0")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_6xudk")
+autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.341176, 1, 1, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_t0d7j")

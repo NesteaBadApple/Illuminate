@@ -55,6 +55,7 @@ func increase_light():
 # 💀 When hit by a Frog
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Frog"):
+		$hit.play()
 		shrink_light()
 	elif body.is_in_group("Spirit"):
 		increase_light()
