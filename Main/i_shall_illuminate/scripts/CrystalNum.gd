@@ -7,3 +7,4 @@ func _ready() -> void:
 
 func _on_crystal_count_changed(total: int, lit: int) -> void:
 	text = "%d / %d" % [lit, total]
+	

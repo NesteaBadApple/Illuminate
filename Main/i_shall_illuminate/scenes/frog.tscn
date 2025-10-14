@@ -123,7 +123,7 @@ position = Vector2(9.53674e-07, 1.43051e-06)
 scale = Vector2(1.63996, 1.94825)
 sprite_frames = SubResource("SpriteFrames_whe2r")
 animation = &"charge"
-frame_progress = 0.248253
+frame_progress = 0.741553
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_p8yr8")

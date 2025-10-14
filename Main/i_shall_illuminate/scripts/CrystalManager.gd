@@ -3,6 +3,7 @@ extends Node
 var total_crystal: int = 0
 var lit_crystal: int = 0
 var darkmode: DirectionalLight2D = null
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 signal crystal_count_changed(total: int, lit: int)
 
@@ -25,5 +26,6 @@ func _clear_dark_mode() -> void:
 		var tween := create_tween()
 		tween.tween_property(darkmode, "energy", 0.0, 1.5) # fade out over 1.5 seconds
 		tween.tween_callback(func(): darkmode.visible = false)
+		
 	else:
 		print("⚠️ No darkmode assigned!")
