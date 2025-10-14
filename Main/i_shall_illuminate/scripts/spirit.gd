@@ -1,8 +1,9 @@
 extends Area2D
 
-@export var light_increase: float = 10.0  # how much the player light grows
 
 func _on_body_entered(body: Node) -> void:
+	# Only react to the player's hitbox
 	if body.is_in_group("player"):
-		body.increase_light()
-		queue_free()  # disappear after collected
+		if body.has_method("increase_light"):
+			body.increase_light()
+		queue_free() # Remove the spirit

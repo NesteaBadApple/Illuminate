@@ -4,3 +4,5 @@ extends Node
 
 func _ready() -> void:
 	CrystalManager.darkmode = dark_light
+	var player = $Player
+	player.connect("frog_hit_player", Callable(self, "_on_frog_hit_player"))

@@ -1,7 +1,7 @@
 extends PointLight2D
 
 @export var pulse_speed: float = 1.0   # seconds per full pulse
-@export var min_energy: float = 0.3
+@export var min_energy: float = 0.5
 @export var max_energy: float = 1
 
 var t: float = 0.0

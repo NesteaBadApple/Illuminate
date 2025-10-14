@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2r4c61pcpx3f"]
+[gd_scene load_steps=11 format=3 uid="uid://d2r4c61pcpx3f"]
 
 [ext_resource type="Script" uid="uid://b08x5pq4bm7w0" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c1v7bsmi0jiqe" path="res://sprites/icon.svg" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://bexdglyutcb2" path="res://scripts/player_light.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cjqaiut6146ck" path="res://sprites/noprogress.png" id="5_fjrip"]
+[ext_resource type="Texture2D" uid="uid://csb0f3248vk1e" path="res://sprites/halffullprogress.png" id="6_smehm"]
+[ext_resource type="Texture2D" uid="uid://kgf83b7leb67" path="res://sprites/fullprogress.png" id="7_ur7pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 
@@ -15,8 +18,12 @@ gradient = SubResource("Gradient_g2els")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 15
 scale = Vector2(0.5, 0.5)
+collision_mask = 2
 script = ExtResource("1_g2els")
 sprint_multiplier = 2.0
 
@@ -36,5 +43,37 @@ position = Vector2(1.90735e-06, 1.90735e-06)
 scale = Vector2(2.96875, 2.75)
 color = Color(0.943004, 0.941417, 0.739006, 1)
 texture = SubResource("GradientTexture2D_qhqgy")
-texture_scale = 2.0
 script = ExtResource("3_qhqgy")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(2.96875, 2.75)
+collision_layer = 8
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_qlg0r")
+
+[node name="Player UI" type="CanvasLayer" parent="."]
+
+[node name="Light_Bar" type="TextureProgressBar" parent="Player UI"]
+offset_left = -20.0
+offset_top = 6.0
+offset_right = 44.0
+offset_bottom = 70.0
+scale = Vector2(4.16827, 4.16827)
+texture_under = ExtResource("5_fjrip")
+texture_progress = ExtResource("6_smehm")
+
+[node name="Stamina_Bar" type="TextureProgressBar" parent="Player UI"]
+offset_left = -35.0
+offset_top = -44.0
+offset_right = 29.0
+offset_bottom = 20.0
+scale = Vector2(5.46154, 4.84211)
+value = 100.0
+texture_under = ExtResource("5_fjrip")
+texture_progress = ExtResource("7_ur7pv")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -7,11 +7,12 @@ extends CharacterBody2D
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 
 @export var jump_speed: float = 100.0
-@export var detection_delay: float = 0.5
-@export var attack_buffer: float = 0.3
-@export var attack_cooldown: float = 1.5
-@export var detection_radius: float = 150.0
+@export var detection_delay: float = 2.5   # Time before starting attack
+@export var attack_buffer: float = .3       # Time between charge and jump
+@export var attack_cooldown: float = .1
+@export var detection_radius: float = 250.0
 @export var jump_duration: float = 0.4
+@export var sprite_faces_right: bool = true
 
 var target: Node2D = null
 var has_target: bool = false
@@ -22,9 +23,7 @@ var jump_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	anim.play("idle")
-	detection_area.monitoring = true
-	detection_area.monitorable = true
-
+	anim.flip_h
 	detection_area.connect("body_entered", _on_body_entered)
 	detection_area.connect("body_exited", _on_body_exited)
 	jump_timer.connect("timeout", _on_jump_timer_timeout)
@@ -44,20 +43,14 @@ func _physics_process(delta: float) -> void:
 			anim.play("landing")
 			_start_attack_cooldown()
 
-		for i in range(get_slide_collision_count()):
-			var collision = get_slide_collision(i)
-			if collision.get_collider().is_in_group("player"):
-				_on_player_hit(collision.get_collider())
-				break
+	# Continuously track player
+	if not is_jumping and target and is_instance_valid(target):
+		_face_target()
 
-	# 🧠 Continuous detection check
-	if not is_jumping and not attack_cooldown_timer.time_left and can_attack and target and is_instance_valid(target):
-		var distance = global_position.distance_to(target.global_position)
-		if distance <= detection_radius:
-			_try_attack_target()
-		else:
-			_reset_to_idle()
 
+# =======================
+# 🎯 Detection
+# =======================
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		target = body
@@ -72,31 +65,42 @@ func _on_body_exited(body: Node2D) -> void:
 		_reset_to_idle()
 
 func _try_attack_target() -> void:
-	if not can_attack or is_jumping or attack_buffer_timer.time_left > 0.0 or jump_timer.time_left > 0.0:
-		anim.play("alert")
+	if not can_attack or is_jumping or jump_timer.time_left > 0.0:
 		return
 
-	anim.play("idle")
+	can_attack = false
+	anim.play("alert")
 	_face_target()
+
+	# 🕒 Wait before attacking
 	jump_timer.start(detection_delay)
+	print("⚠️ Frog is charging attack...")
 
 func _on_jump_timer_timeout() -> void:
-	if target and is_instance_valid(target) and has_target and can_attack:
-		anim.play("charge")
+	if target and is_instance_valid(target) and has_target:
+		anim.play("alert")
 		attack_buffer_timer.start(attack_buffer)
+		print("💢 Frog charging jump!")
 
+
+# =======================
+# 🐸 Jump Behavior
+# =======================
 func _on_attack_buffer_timeout() -> void:
-	if target and is_instance_valid(target) and has_target and can_attack:
+	if target and is_instance_valid(target) and has_target:
 		_jump_toward_target()
 
 func _jump_toward_target() -> void:
 	is_jumping = true
-	can_attack = false
 	jump_timer_elapsed = 0.0
 	anim.play("jump")
 	_face_target()
 	jump_direction = (target.global_position - global_position).normalized()
-	print("🐸 Jumping toward player!")
+
+	# Pass through player but not walls
+	_set_collision_with_player(false)
+
+	print("💨 Frog jumps toward player!")
 
 func _start_attack_cooldown() -> void:
 	attack_cooldown_timer.start(attack_cooldown)
@@ -104,22 +108,41 @@ func _start_attack_cooldown() -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	can_attack = true
-	print("🐸 Frog ready to attack again!")
+	print("✅ Frog ready again!")
+	anim.play("alert")
+	
+	
 
+# =======================
+# 🧠 Helpers
+# =======================
 func _face_target() -> void:
-	if not target:
+	if not target or not is_instance_valid(target):
 		return
-	anim.flip_h = target.global_position.x < global_position.x
+
+	var target_is_left := target.global_position.x < global_position.x
+	if sprite_faces_right:
+		anim.flip_h = not target_is_left
+	else:
+		anim.flip_h = target_is_left
 
 func _reset_to_idle() -> void:
-	if not is_jumping and not attack_buffer_timer.time_left and not jump_timer.time_left:
+	if not is_jumping and not jump_timer.time_left and not attack_buffer_timer.time_left:
 		anim.play("idle")
+
+func _set_collision_with_player(enabled: bool) -> void:
+	# Assume player = layer 1, wall = layer 2
+	if enabled:
+		collision_mask = 0b11  # collide with player & wall
+	else:
+		collision_mask = 0b10  # only walls
 
 func _on_animation_finished() -> void:
 	if anim.animation == "landing" and not is_jumping:
+		_set_collision_with_player(true)
 		_reset_to_idle()
-
+		
 func _on_player_hit(player: Node2D) -> void:
-	if player.has_method("reset_light"):
-		player.reset_light()
-		print("💀 Frog hit the player! Light reset.")
+	if player.has_method("reduce_light"):
+		player.shrink_light()
+		print("💀 Frog hit the player! Light reduced.")

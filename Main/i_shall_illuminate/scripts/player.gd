@@ -4,17 +4,17 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 @export var sprint_multiplier: float = 1.5
 @export var stamina_max: float = 100.0
-@export var stamina_drain_rate: float = 25.0   # per second
-@export var stamina_recover_rate: float = 15.0  # per second
+@export var stamina_drain_rate: float = 25.0
+@export var stamina_recover_rate: float = 15.0
 
-@onready var stamina_bar: TextureProgressBar = $"../UI/Stamina_Bar"
+@onready var stamina_bar: TextureProgressBar = $"Player UI/Stamina_Bar"
 var stamina: float = stamina_max
 var is_sprinting: bool = false
 
 # 💡 Player Light
 @onready var light_node: PointLight2D = $PlayerLight
-@export var light_growth: float = 10.0      # how much the light grows per spirit
-@export var max_light_radius: float = 300.0 # max light size
+@onready var light_bar: TextureProgressBar = $"Player UI/Light_Bar"
+var light_max = 5
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
@@ -38,13 +38,39 @@ func update_sprint_bar() -> void:
 	if stamina_bar:
 		stamina_bar.value = stamina
 
-# ✨ Called when the player touches a Spirit
+# ✨ When touching a Spirit
 func increase_light():
 	if not light_node:
 		return
 
-	var current_scale = light_node.texture_scale
-	var target_scale = min(current_scale + light_growth / 100.0, max_light_radius / 100.0)
+	var grow_factor : = .5
+	var new_scale = min(light_node.texture_scale + .5, light_max)
 
 	var tween = create_tween()
-	tween.tween_property(light_node, "texture_scale", target_scale, 0.5)
+	tween.tween_property(light_node, "texture_scale", new_scale, 0.3)
+	if light_bar:
+		light_bar.value = (new_scale / light_max) * light_bar.max_value
+	print("✨ Light grew to:", new_scale) 
+
+# 💀 When hit by a Frog
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Frog"):
+		shrink_light()
+	elif body.is_in_group("Spirit"):
+		increase_light()
+		body.queue_free()
+
+# 🕯️ Shrink Light when hit
+func shrink_light():
+	if not light_node:
+		return
+
+	var shrink_factor := 0.5
+	var min_scale := 0.25
+	var new_scale = max(light_node.texture_scale - .5, min_scale)
+
+	var tween = create_tween()
+	tween.tween_property(light_node, "texture_scale", new_scale, 0.3)
+	if light_bar:
+		light_bar.value = (new_scale / 5.0) * light_bar.max_value
+	print("💀 Light shrunk to:", new_scale)
