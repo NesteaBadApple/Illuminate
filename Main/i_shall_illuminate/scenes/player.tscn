@@ -1,14 +1,72 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2r4c61pcpx3f"]
+[gd_scene load_steps=21 format=3 uid="uid://d2r4c61pcpx3f"]
 
 [ext_resource type="Script" uid="uid://b08x5pq4bm7w0" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://c1v7bsmi0jiqe" path="res://sprites/icon.svg" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bpgfdx44pao4m" path="res://sprites/back1.png" id="2_f1ej7"]
+[ext_resource type="Texture2D" uid="uid://b2wrqd1owe4cc" path="res://sprites/front1.png" id="2_smehm"]
+[ext_resource type="Texture2D" uid="uid://dqudx82rcxqf5" path="res://sprites/back2.png" id="3_oprun"]
 [ext_resource type="Script" uid="uid://bexdglyutcb2" path="res://scripts/player_light.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://badpai36d5d7" path="res://sprites/front2.png" id="3_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://cjqaiut6146ck" path="res://sprites/noprogress.png" id="5_fjrip"]
+[ext_resource type="Texture2D" uid="uid://cyqj1im3hi010" path="res://sprites/left1.png" id="6_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://csb0f3248vk1e" path="res://sprites/halffullprogress.png" id="6_smehm"]
 [ext_resource type="AudioStream" uid="uid://bb08shw775eic" path="res://sprites/punch-04-383965.mp3" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://27hrx5bur5lx" path="res://sprites/left2.png" id="7_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://kgf83b7leb67" path="res://sprites/fullprogress.png" id="7_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://lbe872bcphg" path="res://sprites/right1.png" id="8_fulsm"]
+[ext_resource type="Texture2D" uid="uid://kwku81sxbjnc" path="res://sprites/right2.png" id="9_4r5pv"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f1ej7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4r1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f1ej7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oprun")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_smehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ur7pv")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_a8ls1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qfm1y")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fulsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4r5pv")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_g2els"]
 offsets = PackedFloat32Array(0, 0.554839, 1)
@@ -19,7 +77,8 @@ gradient = SubResource("Gradient_g2els")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
+radius = 8.6151
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 15
@@ -28,19 +87,30 @@ collision_mask = 2
 script = ExtResource("1_g2els")
 sprint_multiplier = 2.0
 
+[node name="SprintParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+amount_ratio = 0.5
+lifetime = 0.3
+interp_to_end = 0.1
+explosiveness = 0.2
+randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_f1ej7")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)
 shape = SubResource("CircleShape2D_dqkch")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_qhqgy")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_y4r1p")
+animation = &"back"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-position = Vector2(1.90735e-06, 1.90735e-06)
+position = Vector2(0, 6)
 scale = Vector2(2.96875, 2.75)
 color = Color(0.943004, 0.941417, 0.739006, 1)
 texture = SubResource("GradientTexture2D_qhqgy")
@@ -53,8 +123,8 @@ collision_layer = 8
 collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_qlg0r")
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_smehm")
 
 [node name="Player UI" type="CanvasLayer" parent="."]
 

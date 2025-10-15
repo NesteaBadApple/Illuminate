@@ -4,11 +4,14 @@ extends Node
 @onready var pause_menu := $PauseMenu  # CanvasLayer with Panel + Buttons
 @onready var resume_button := $PauseMenu/Panel/VBoxContainer/resume
 @onready var quit_button := $PauseMenu/Panel/VBoxContainer/quit
+@onready var bgm: AudioStreamPlayer2D = $AudioStreamPlayer2D
 var is_paused: bool = false
+
 
 func _ready() -> void:
 	CrystalManager.darkmode = dark_light
-	
+	bgm.stream.loop = true
+	bgm.play()
 
 func _process(delta: float) -> void:
 	# Toggle pause with Esc

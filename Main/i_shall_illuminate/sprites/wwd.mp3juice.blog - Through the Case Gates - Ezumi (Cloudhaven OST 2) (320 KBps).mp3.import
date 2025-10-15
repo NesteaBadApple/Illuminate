@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dv2yvfs0l6ljc"
+path="res://.godot/imported/wwd.mp3juice.blog - Through the Case Gates - Ezumi (Cloudhaven OST 2) (320 KBps).mp3-b2ec812eb0e1936359572911894d9e8f.mp3str"
+
+[deps]
+
+source_file="res://sprites/wwd.mp3juice.blog - Through the Case Gates - Ezumi (Cloudhaven OST 2) (320 KBps).mp3"
+dest_files=["res://.godot/imported/wwd.mp3juice.blog - Through the Case Gates - Ezumi (Cloudhaven OST 2) (320 KBps).mp3-b2ec812eb0e1936359572911894d9e8f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

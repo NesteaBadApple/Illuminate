@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqtqphim5x4cq"]
+
+[ext_resource type="Texture2D" uid="uid://du6i6ws687asv" path="res://sprites/firefly1.jpg" id="1_c4rma"]
+
+[node name="NpcDialogue" type="CanvasLayer"]
+
+[node name="NpcPanel" type="Panel" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="NpcPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TextureRect" type="TextureRect" parent="NpcPanel"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_c4rma")

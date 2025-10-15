@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://dfewsbmib1nuy"]
+
+[ext_resource type="Script" uid="uid://b6kswxtujhoqr" path="res://scripts/npc.gd" id="1_nh2m4"]
+[ext_resource type="Texture2D" uid="uid://bo0h48q0rmg7s" path="res://sprites/Mainspirit.png" id="2_abqhh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv78h"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n8xq"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wlns"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl2vt"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwkja"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tygy"]
+atlas = ExtResource("2_abqhh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sptji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv78h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n8xq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wlns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl2vt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwkja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tygy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abqhh"]
+
+[sub_resource type="Gradient" id="Gradient_abqhh"]
+offsets = PackedFloat32Array(0, 0.503226)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rv78h"]
+gradient = SubResource("Gradient_abqhh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="NPC" type="Node2D"]
+script = ExtResource("1_nh2m4")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sptji")
+autoplay = "default"
+frame_progress = 0.768213
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_abqhh")
+
+[node name="dialogue_bubble" type="Node2D" parent="."]
+light_mask = 16
+z_index = 17
+position = Vector2(-35, -11)
+scale = Vector2(0.5, 0.5)
+
+[node name="Panel" type="Panel" parent="dialogue_bubble"]
+offset_left = -41.0
+offset_top = -41.0
+offset_right = -1.0
+offset_bottom = -1.0
+
+[node name="Label" type="Label" parent="dialogue_bubble/Panel"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TextureRect" type="TextureRect" parent="dialogue_bubble/Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_rv78h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

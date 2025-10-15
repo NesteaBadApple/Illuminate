@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c11tgebwk6i2n"]
 
-[ext_resource type="Texture2D" uid="uid://l5tpm6fnxl5g" path="res://sprites/crystal.png" id="1_0mmd5"]
 [ext_resource type="Script" uid="uid://n7ajf12iveyy" path="res://scripts/crystal.gd" id="1_t4dcj"]
+[ext_resource type="Texture2D" uid="uid://c5smnfhrbyqo0" path="res://sprites/crsy.png" id="2_g5hse"]
 [ext_resource type="AudioStream" uid="uid://clbh7qx3mrjuf" path="res://sprites/shine-11-268907.mp3" id="3_g5hse"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0mmd5"]
@@ -22,7 +22,7 @@ script = ExtResource("1_t4dcj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_0mmd5")
+texture = ExtResource("2_g5hse")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0mmd5")
@@ -36,5 +36,6 @@ texture = SubResource("GradientTexture2D_t4dcj")
 [node name="LitSfx" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(20.1563, 20.1563)
 stream = ExtResource("3_g5hse")
+volume_db = -10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

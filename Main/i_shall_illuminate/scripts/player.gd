@@ -6,26 +6,42 @@ extends CharacterBody2D
 @export var stamina_max: float = 100.0
 @export var stamina_drain_rate: float = 25.0
 @export var stamina_recover_rate: float = 15.0
-
+@onready var animation: AnimatedSprite2D = $Sprite2D
 @onready var stamina_bar: TextureProgressBar = $"Player UI/Stamina_Bar"
 var stamina: float = stamina_max
 var is_sprinting: bool = false
-
+@onready var particles: GPUParticles2D = $SprintParticles
 # 💡 Player Light
 @onready var light_node: PointLight2D = $PlayerLight
 @onready var light_bar: TextureProgressBar = $"Player UI/Light_Bar"
 var light_max = 5
+
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("down"):
+		animation.play("front")
+	elif Input.is_action_pressed("up"):
+		animation.play("back")
+	elif Input.is_action_pressed("left"):
+		animation.play("left")
+	elif Input.is_action_pressed("right"):
+		animation.play("right")
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	is_sprinting = Input.is_action_pressed("sprint") and stamina > 0.0 and direction != Vector2.ZERO
 
 	var current_speed := speed
+		
 	if is_sprinting:
 		current_speed *= sprint_multiplier
 		stamina -= stamina_drain_rate * delta
+		particles.emitting = true
+		if direction != Vector2.ZERO:
+			particles.rotation = direction.angle() + PI  # opposite direction
+
 	else:
 		stamina += stamina_recover_rate * delta
+		particles.emitting = false
 
 	stamina = clamp(stamina, 0.0, stamina_max)
 	velocity = direction * current_speed
