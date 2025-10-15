@@ -6,6 +6,7 @@ extends Node
 @onready var quit_button := $PauseMenu/Panel/VBoxContainer/quit
 @onready var bgm: AudioStreamPlayer2D = $AudioStreamPlayer2D
 var is_paused: bool = false
+@onready var ending_dialogue: Node2D = $NPC
 
 
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _ready() -> void:
 	bgm.stream.loop = true
 	bgm.play()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Toggle pause with Esc
 	if Input.is_action_just_pressed("pause"):
 		_toggle_pause()

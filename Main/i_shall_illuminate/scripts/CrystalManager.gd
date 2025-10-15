@@ -3,12 +3,11 @@ extends Node
 var total_crystal: int = 0
 var lit_crystal: int = 0
 var darkmode: DirectionalLight2D = null
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var lit_sound: AudioStreamPlayer2D = $LitSfx
+
 
 signal crystal_count_changed(total: int, lit: int)
 
-func register_crystal(crystal: Node) -> void:
+func register_crystal(_crystal: Node) -> void:
 	total_crystal += 1
 	print("Registered crystal. Total:", total_crystal)
 	emit_signal("crystal_count_changed", total_crystal, lit_crystal)
@@ -31,3 +30,6 @@ func _clear_dark_mode() -> void:
 		
 	else:
 		print("⚠️ No darkmode assigned!")
+
+	
+	

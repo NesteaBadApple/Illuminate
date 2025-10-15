@@ -16,7 +16,7 @@ var is_sprinting: bool = false
 @onready var light_bar: TextureProgressBar = $"Player UI/Light_Bar"
 var light_max = 5
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("down"):
 		animation.play("front")
 	elif Input.is_action_pressed("up"):
@@ -59,7 +59,6 @@ func increase_light():
 	if not light_node:
 		return
 
-	var grow_factor : = .5
 	var new_scale = min(light_node.texture_scale + .5, light_max)
 
 	var tween = create_tween()
@@ -82,7 +81,6 @@ func shrink_light():
 	if not light_node:
 		return
 
-	var shrink_factor := 0.5
 	var min_scale := 0.25
 	var new_scale = max(light_node.texture_scale - .5, min_scale)
 

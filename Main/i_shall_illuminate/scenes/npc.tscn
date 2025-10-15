@@ -82,7 +82,7 @@ shape = SubResource("RectangleShape2D_abqhh")
 [node name="dialogue_bubble" type="Node2D" parent="."]
 light_mask = 16
 z_index = 17
-position = Vector2(-35, -11)
+position = Vector2(-50, -30)
 scale = Vector2(0.5, 0.5)
 
 [node name="Panel" type="Panel" parent="dialogue_bubble"]
@@ -92,10 +92,12 @@ offset_right = -1.0
 offset_bottom = -1.0
 
 [node name="Label" type="Label" parent="dialogue_bubble/Panel"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="TextureRect" type="TextureRect" parent="dialogue_bubble/Panel"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 

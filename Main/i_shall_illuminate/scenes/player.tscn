@@ -107,7 +107,7 @@ sprite_frames = SubResource("SpriteFrames_y4r1p")
 animation = &"back"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(5, 5)
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(0, 6)

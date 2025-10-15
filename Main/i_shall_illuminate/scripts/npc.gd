@@ -15,13 +15,12 @@ extends Node2D
 
 var player_in_range := false
 var current_line := 0
+var showing_ending := false
 
 @onready var dialogue_bubble = $dialogue_bubble
 @onready var dialogue_label = $dialogue_bubble/Panel/Label
 
 func _ready():
-	$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
-	$Area2D.connect("body_exited", Callable(self, "_on_body_exited"))
 	dialogue_bubble.visible = false
 
 func _on_body_entered(body: Node2D):
@@ -33,14 +32,14 @@ func _on_body_exited(body: Node2D):
 		player_in_range = false
 		hide_dialogue()
 
-func _process(delta):
+func _process(_delta):
 	if player_in_range and Input.is_action_just_pressed("interact"):
 		show_next_line()
 		print("clicked")
 
 func show_next_line():
 	if current_line < dialogue_lines.size():
-		dialogue_label.text = dialogue_lines[current_line]
+		dialogue_label.text = dialogue_lines[current_line]	
 		dialogue_bubble.visible = true
 		current_line += 1
 	else:

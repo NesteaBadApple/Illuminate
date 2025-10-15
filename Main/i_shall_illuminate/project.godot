@@ -18,7 +18,6 @@ config/icon="res://sprites/icon.svg"
 [autoload]
 
 CrystalManager="*res://scripts/CrystalManager.gd"
-DialogueManager="*res://scripts/dialogue_manager.gd"
 
 [display]
 
@@ -26,6 +25,10 @@ window/size/viewport_width=1200
 window/size/viewport_height=800
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/custom_font="uid://31vfnn8h275x"
 
 [input]
 

@@ -23,7 +23,6 @@ var jump_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	anim.play("idle")
-	anim.flip_h
 	detection_area.connect("body_entered", _on_body_entered)
 	detection_area.connect("body_exited", _on_body_exited)
 	jump_timer.connect("timeout", _on_jump_timer_timeout)
