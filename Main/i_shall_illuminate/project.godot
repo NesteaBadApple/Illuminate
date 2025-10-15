@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="I_Shall_Illuminate"
-run/main_scene="uid://1gg5wvicfjjq"
+run/main_scene="uid://bwckvakpt6a7i"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 
